@@ -1,16 +1,6 @@
-import { BloomComponent, StyleProps } from '@/types/index';
+import { UIComponent, StyleProps } from '@/types/index';
 
 export const getComponentStyle = (styles: StyleProps): React.CSSProperties => {
-  // Construct border from individual properties
-  let border: string | undefined = undefined;
-  if (styles.borderStyle && styles.borderStyle !== 'none') {
-    const width = styles.borderWidth || '1px';
-    const color = styles.borderColor || '#000000';
-    border = `${width} ${styles.borderStyle} ${color}`;
-  } else if (styles.borderStyle === 'none') {
-    border = 'none';
-  }
-
   return {
     color: styles.color,
     backgroundColor: styles.backgroundColor,
@@ -34,7 +24,6 @@ export const getComponentStyle = (styles: StyleProps): React.CSSProperties => {
     maxWidth: styles.maxWidth,
     minHeight: styles.minHeight,
     maxHeight: styles.maxHeight,
-    border: border,
     borderRadius: styles.borderRadius,
     opacity: styles.opacity ? parseFloat(styles.opacity) : undefined,
     boxShadow: styles.boxShadow,
@@ -45,9 +34,9 @@ export const getComponentStyle = (styles: StyleProps): React.CSSProperties => {
 };
 
 export const findComponentById = (
-  components: BloomComponent[],
+  components: UIComponent[],
   id: string
-): BloomComponent | null => {
+): UIComponent | null => {
   for (const component of components) {
     if (component.id === id) return component;
     if (component.children) {
@@ -59,10 +48,10 @@ export const findComponentById = (
 };
 
 export const updateComponentStyle = (
-  components: BloomComponent[],
+  components: UIComponent[],
   componentId: string,
   styleUpdates: Partial<StyleProps>
-): BloomComponent[] => {
+): UIComponent[] => {
   return components.map((component) => {
     if (component.id === componentId) {
       return {

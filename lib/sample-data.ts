@@ -1,6 +1,6 @@
-import { BloomScreen } from '@/types/index';
+import { EditorScreen } from '@/types/index';
 
-export const SAMPLE_SCREEN: BloomScreen = {
+export const SAMPLE_SCREEN: EditorScreen = {
   id: 'screen-1',
   name: 'Product Showcase',
   components: [
@@ -21,7 +21,7 @@ export const SAMPLE_SCREEN: BloomScreen = {
           id: 'heading-1',
           type: 'heading',
           label: 'Main Title',
-          content: 'Welcome to Bloom',
+          content: 'Frontend Editor',
           styles: {
             fontSize: '32px',
             fontWeight: '700',
@@ -73,9 +73,6 @@ export const SAMPLE_SCREEN: BloomScreen = {
             padding: '24px',
             backgroundColor: '#ffffff',
             borderRadius: '12px',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: '#e5e7eb',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             width: '280px',
             minHeight: '200px',
@@ -116,9 +113,6 @@ export const SAMPLE_SCREEN: BloomScreen = {
             padding: '24px',
             backgroundColor: '#ffffff',
             borderRadius: '12px',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: '#e5e7eb',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             width: '280px',
             minHeight: '200px',
@@ -159,9 +153,6 @@ export const SAMPLE_SCREEN: BloomScreen = {
             padding: '24px',
             backgroundColor: '#ffffff',
             borderRadius: '12px',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: '#e5e7eb',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             width: '280px',
             minHeight: '200px',
@@ -232,7 +223,6 @@ export const SAMPLE_SCREEN: BloomScreen = {
             fontSize: '16px',
             fontWeight: '600',
             borderRadius: '8px',
-            borderStyle: 'none',
             boxShadow: '0 2px 8px rgba(79,70,229,0.3)',
           },
         },
@@ -241,6 +231,6 @@ export const SAMPLE_SCREEN: BloomScreen = {
   ],
   metadata: {
     createdAt: new Date().toISOString(),
-    description: 'Sample product showcase screen for Bloom interactive playground',
+    description: 'Sample product showcase screen for frontend visual editor',
   },
 };

@@ -1,6 +1,6 @@
-# 🎨 Sample Screens for Bloom Interactive Playground
+# 🎨 Sample Screens for Frontend Visual Editor
 
-This folder contains 3 diverse sample JSON files ready to import and test in the Bloom Interactive Playground.
+This folder contains 3 diverse sample JSON files ready to import and test in the Frontend Visual Editor.
 
 ## 📋 Available Samples
 
@@ -51,11 +51,11 @@ This folder contains 3 diverse sample JSON files ready to import and test in the
 ## 🚀 How to Test
 
 ### Option 1: Import via UI
-1. Start the Bloom Interactive Playground (`npm run dev`)
-2. Click the **"Import JSON"** button in the header
+1. Start the Frontend Visual Editor (`npm run dev`)
+2. Click the **"Upload JSON File"** button
 3. Select any `.json` file from this folder
 4. The design loads in the editor
-5. Start tweaking styles!
+5. Start editing styles!
 
 ### Option 2: Copy & Paste
 1. Open a `.json` file with a text editor

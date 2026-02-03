@@ -1,0 +1,199 @@
+{
+  "id": "website-landing-001",
+  "name": "Website Landing Page",
+  "components": [
+    {
+      "id": "header-1",
+      "type": "container",
+      "label": "Header Section",
+      "styles": {
+        "display": "flex",
+        "flexDirection": "column",
+        "padding": "48px 24px",
+        "backgroundColor": "#ffffff",
+        "gap": "24px"
+      },
+      "children": [
+        {
+          "id": "heading-main",
+          "type": "heading",
+          "label": "Main Headline",
+          "content": "Build Faster, Ship Smarter",
+          "styles": {
+            "fontSize": "48px",
+            "fontWeight": "700",
+            "fontFamily": "Inter",
+            "color": "#1a1a1a",
+            "textAlign": "center",
+            "marginBottom": "16px"
+          }
+        },
+        {
+          "id": "text-subtitle",
+          "type": "text",
+          "label": "Subtitle",
+          "content": "The all-in-one platform for modern web development",
+          "styles": {
+            "fontSize": "20px",
+            "fontWeight": "400",
+            "fontFamily": "Inter",
+            "color": "#6b7280",
+            "textAlign": "center",
+            "marginBottom": "32px"
+          }
+        },
+        {
+          "id": "cta-button",
+          "type": "button",
+          "label": "CTA Button",
+          "content": "Get Started Free",
+          "styles": {
+            "backgroundColor": "#4f46e5",
+            "color": "#ffffff",
+            "padding": "16px 32px",
+            "fontSize": "18px",
+            "fontWeight": "600",
+            "borderRadius": "8px",
+            "textAlign": "center"
+          }
+        }
+      ]
+    },
+    {
+      "id": "features-section",
+      "type": "container",
+      "label": "Features Grid",
+      "styles": {
+        "display": "flex",
+        "flexDirection": "column",
+        "padding": "64px 24px",
+        "backgroundColor": "#f9fafb",
+        "gap": "32px"
+      },
+      "children": [
+        {
+          "id": "features-heading",
+          "type": "heading",
+          "label": "Features Title",
+          "content": "Everything You Need",
+          "styles": {
+            "fontSize": "36px",
+            "fontWeight": "700",
+            "fontFamily": "Inter",
+            "color": "#1a1a1a",
+            "textAlign": "center",
+            "marginBottom": "48px"
+          }
+        },
+        {
+          "id": "feature-card-1",
+          "type": "card",
+          "label": "Feature Card 1",
+          "styles": {
+            "backgroundColor": "#ffffff",
+            "padding": "32px",
+            "borderRadius": "12px",
+            "marginBottom": "16px",
+            "boxShadow": "0 1px 3px rgba(0,0,0,0.1)"
+          },
+          "children": [
+            {
+              "id": "feature-1-title",
+              "type": "heading",
+              "content": "🚀 Fast Performance",
+              "styles": {
+                "fontSize": "24px",
+                "fontWeight": "600",
+                "color": "#1a1a1a",
+                "marginBottom": "12px"
+              }
+            },
+            {
+              "id": "feature-1-desc",
+              "type": "text",
+              "content": "Lightning-fast load times with optimized code",
+              "styles": {
+                "fontSize": "16px",
+                "color": "#6b7280",
+                "lineHeight": "1.5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feature-card-2",
+          "type": "card",
+          "label": "Feature Card 2",
+          "styles": {
+            "backgroundColor": "#ffffff",
+            "padding": "32px",
+            "borderRadius": "12px",
+            "marginBottom": "16px",
+            "boxShadow": "0 1px 3px rgba(0,0,0,0.1)"
+          },
+          "children": [
+            {
+              "id": "feature-2-title",
+              "type": "heading",
+              "content": "🎨 Beautiful Design",
+              "styles": {
+                "fontSize": "24px",
+                "fontWeight": "600",
+                "color": "#1a1a1a",
+                "marginBottom": "12px"
+              }
+            },
+            {
+              "id": "feature-2-desc",
+              "type": "text",
+              "content": "Stunning interfaces that users love",
+              "styles": {
+                "fontSize": "16px",
+                "color": "#6b7280",
+                "lineHeight": "1.5"
+              }
+            }
+          ]
+        },
+        {
+          "id": "feature-card-3",
+          "type": "card",
+          "label": "Feature Card 3",
+          "styles": {
+            "backgroundColor": "#ffffff",
+            "padding": "32px",
+            "borderRadius": "12px",
+            "boxShadow": "0 1px 3px rgba(0,0,0,0.1)"
+          },
+          "children": [
+            {
+              "id": "feature-3-title",
+              "type": "heading",
+              "content": "🔒 Secure & Reliable",
+              "styles": {
+                "fontSize": "24px",
+                "fontWeight": "600",
+                "color": "#1a1a1a",
+                "marginBottom": "12px"
+              }
+            },
+            {
+              "id": "feature-3-desc",
+              "type": "text",
+              "content": "Enterprise-grade security built in",
+              "styles": {
+                "fontSize": "16px",
+                "color": "#6b7280",
+                "lineHeight": "1.5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "createdAt": "2026-02-03T00:00:00.000Z",
+    "description": "Sample website landing page design"
+  }
+}

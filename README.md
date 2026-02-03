@@ -1,6 +1,18 @@
-# Bloom Interactive Playground
+# Frontend Visual Editor
 
-A **Photoshop-like visual editor** for Bloom screen components. Design, tweak, and export screen layouts with live preview and comprehensive style controls.
+A **visual editor concept** for websites and mobile app interfaces. Edit frontend designs with live preview and comprehensive style controls without changing backend code.
+
+## Overview
+
+This is a proof-of-concept tool that demonstrates a workflow for editing frontend designs visually while keeping backend logic completely separate and untouched.
+
+### The Workflow
+
+1. **Upload Website/App** - Import your website or mobile app interface
+2. **Generate JSON** - System creates a JSON representation of the frontend (backend remains unchanged)
+3. **Open Live Editor** - Edit styles, colors, layouts, and spacing visually with real-time preview
+4. **Save JSON Changes** - Export your modified design as JSON
+5. **Apply to Code** - Upload the JSON changes back to your codebase
 
 ## Features
 
@@ -19,10 +31,10 @@ A **Photoshop-like visual editor** for Bloom screen components. Design, tweak, a
 - Support for containers, buttons, cards, text, headings, inputs, images
 
 💾 **Save & Export**
-- Auto-save to browser localStorage
-- Export screen as clean JSON
+- Auto-save to browser sessionStorage
+- Export design as clean JSON
 - Import JSON files to continue editing
-- Perfect for Bloom integration
+- Safe for backend - only frontend changes
 
 ## Quick Start
 
@@ -35,19 +47,18 @@ Visit `http://localhost:3000` to start editing!
 
 ## How to Use
 
-1. **Select** a component by clicking on it in the preview or in the component tree
-2. **Edit** its styles using the right-side panel with Photoshop-like controls
-3. **Preview** changes instantly in the center canvas
-4. **Export** your design as JSON when ready
-5. **Import** existing JSON to continue editing
+1. **Import** a JSON file (try one of our samples)
+2. **Select** a component by clicking on it in the preview or in the component tree
+3. **Edit** its styles using the right-side panel with Photoshop-like controls
+4. **Preview** changes instantly in the center canvas
+5. **Export** your design as JSON when ready
 
 ## Project Structure
 
 ```
-bloom/
-├── app/
-│   ├── page.tsx          # Main editor interface
-│   ├── layout.tsx        # Root layout
+app/
+├── page.tsx          # Main editor interface
+├── layout.tsx        # Root layout
 │   └── globals.css       # Global styles
 ├── components/
 │   ├── ComponentRenderer.tsx  # Renders JSON to React components
@@ -88,19 +99,22 @@ Components follow this structure:
 - **TypeScript** - Type safety
 - **Tailwind CSS** - UI styling
 - **Lucide React** - Icons
-- **Browser localStorage** - Data persistence
+- **Browser sessionStorage** - Data persistence
 
-## Future Enhancements
+## Key Benefits
 
-- AI-powered style suggestions
-- Preset design systems
-- Component reusability library
-- Undo/redo history
-- Real-time collaboration
-- Mobile responsive preview
-- Animation controls
-- Theme builder
+✅ **Backend Safe** - Only frontend/visual changes, backend logic untouched  
+✅ **Visual Workflow** - No code editing required for design changes  
+✅ **Multi-Platform** - Works for websites and mobile app interfaces  
+✅ **Real-time Preview** - See changes instantly  
+✅ **Export/Import** - Easy JSON-based workflow
 
----
+## Use Cases
 
-Built to solve Bloom's friction point: iterate on visual designs without touching backend logic. 🚀
+- Rapid prototyping of UI designs
+- A/B testing different visual styles
+- Design handoff between designers and developers
+- Frontend iteration without backend deployments
+- Visual customization for clients
+
+Built as a proof-of-concept for visual frontend editing workflows. 🚀

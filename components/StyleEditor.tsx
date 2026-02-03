@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BloomComponent, StyleProps } from '@/types/index';
+import { UIComponent, StyleProps } from '@/types/index';
 import {
   ChevronDown,
   ChevronRight,
@@ -13,9 +13,9 @@ import {
 } from 'lucide-react';
 
 interface StyleEditorProps {
-  component: BloomComponent | null;
+  component: UIComponent | null;
   onStyleChange: (styleUpdates: Partial<StyleProps>) => void;
-  allComponents: BloomComponent[];
+  allComponents: UIComponent[];
 }
 
 const COLORS = [
@@ -262,11 +262,6 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ component, onStyleChange }) =
           value={styles.backgroundColor}
           onChange={(v) => handleStyleChange('backgroundColor', v)}
         />
-        <ColorInput
-          label="Border Color"
-          value={styles.borderColor}
-          onChange={(v) => handleStyleChange('borderColor', v)}
-        />
       </Section>
 
       {/* Typography */}
@@ -489,20 +484,6 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ component, onStyleChange }) =
             </button>
           ))}
         </div>
-
-        <TextInput
-          label="Border Width"
-          value={styles.borderWidth}
-          onChange={(v) => handleStyleChange('borderWidth', v)}
-          placeholder="1px"
-        />
-
-        <SelectInput
-          label="Border Style"
-          value={styles.borderStyle || 'solid'}
-          options={['none', 'solid', 'dashed', 'dotted', 'double']}
-          onChange={(v) => handleStyleChange('borderStyle', v)}
-        />
 
         <TextInput
           label="Box Shadow"

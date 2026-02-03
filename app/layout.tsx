@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Bloom Interactive Playground',
-  description: 'Live visual editor for Bloom screen components',
+  title: 'Frontend Visual Editor',
+  description: 'Visual editor for websites and mobile apps - edit frontend without touching backend code',
 };
 
 export default function RootLayout({

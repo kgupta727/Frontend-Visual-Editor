@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { BloomComponent } from '@/types/index';
+import { UIComponent } from '@/types/index';
 import { getComponentStyle } from '@/lib/utils';
 
 interface ComponentRendererProps {
-  component: BloomComponent;
+  component: UIComponent;
   selectedId?: string | null;
   onSelectComponent?: (id: string) => void;
   editable?: boolean;

@@ -2,7 +2,6 @@ export interface StyleProps {
   // Colors
   color?: string;
   backgroundColor?: string;
-  borderColor?: string;
   textColor?: string;
 
   // Spacing
@@ -40,8 +39,6 @@ export interface StyleProps {
   maxHeight?: string;
 
   // Border & Radius
-  borderStyle?: string;
-  borderWidth?: string;
   borderRadius?: string;
 
   // Effects
@@ -50,19 +47,19 @@ export interface StyleProps {
   filter?: string;
 }
 
-export interface BloomComponent {
+export interface UIComponent {
   id: string;
   type: 'container' | 'button' | 'text' | 'card' | 'input' | 'image' | 'heading';
   label?: string;
   content?: string;
-  children?: BloomComponent[];
+  children?: UIComponent[];
   styles: StyleProps;
 }
 
-export interface BloomScreen {
+export interface EditorScreen {
   id: string;
   name: string;
-  components: BloomComponent[];
+  components: UIComponent[];
   metadata?: {
     createdAt?: string;
     updatedAt?: string;
@@ -71,7 +68,7 @@ export interface BloomScreen {
 }
 
 export interface EditorState {
-  screen: BloomScreen;
+  screen: EditorScreen;
   selectedComponentId: string | null;
   isDirty: boolean;
 }

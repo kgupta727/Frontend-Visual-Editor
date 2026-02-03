@@ -4,22 +4,25 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ComponentRenderer from '@/components/ComponentRenderer';
 import StyleEditor from '@/components/StyleEditor';
 import ComponentTree from '@/components/ComponentTree';
-import { BloomScreen, StyleProps } from '@/types/index';
+import { EditorScreen, StyleProps } from '@/types/index';
 import { updateComponentStyle, exportToJSON, importFromJSON } from '@/lib/utils';
 import { Download, Upload, Save, RotateCcw, FileJson } from 'lucide-react';
 
 export default function Home() {
-  const [screen, setScreen] = useState<BloomScreen | null>(null);
+  const [screen, setScreen] = useState<EditorScreen | null>(null);
   const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
+  const [previewMode, setPreviewMode] = useState<'mobile' | 'tablet' | 'desktop'>('mobile');
 
   // Load from sessionStorage on mount
   useEffect(() => {
-    const saved = sessionStorage.getItem('bloom-screen');
+    const saved = sessionStorage.getItem('editor-screen');
     if (saved) {
       try {
         const parsed = importFromJSON(saved);
         setScreen(parsed);
+        setShowLanding(false);
       } catch (e) {
         console.error('Failed to load saved screen:', e);
       }
@@ -29,7 +32,7 @@ export default function Home() {
   // Save to sessionStorage when screen changes
   useEffect(() => {
     if (isDirty && screen) {
-      sessionStorage.setItem('bloom-screen', exportToJSON(screen));
+      sessionStorage.setItem('editor-screen', exportToJSON(screen));
       setIsDirty(false);
     }
   }, [isDirty, screen]);
@@ -53,7 +56,7 @@ export default function Home() {
 
   const handleReset = () => {
     if (confirm('Are you sure you want to clear the current screen?')) {
-      sessionStorage.removeItem('bloom-screen');
+      sessionStorage.removeItem('editor-screen');
       window.location.reload();
     }
   };
@@ -64,7 +67,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `bloom-screen-${Date.now()}.json`;
+    a.download = `frontend-design-${Date.now()}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -83,6 +86,7 @@ export default function Home() {
         setScreen(imported);
         setSelectedComponentId(null);
         setIsDirty(true);
+        setShowLanding(false);
         alert('Screen imported successfully!');
       } catch (error) {
         alert('Failed to import JSON: ' + (error as Error).message);
@@ -108,17 +112,112 @@ export default function Home() {
       })()
     : null;
 
-  if (!screen) {
+  // Landing Page
+  if (showLanding && !screen) {
     return (
       <div className="h-screen flex flex-col bg-gradient-to-br from-indigo-50 to-blue-50">
         <header className="bg-white border-b border-gray-200 shadow-sm">
           <div className="px-6 py-4">
             <h1 className="text-2xl font-bold text-gray-900">
-              🎨 Bloom Interactive Playground
+              🎨 Frontend Visual Editor
             </h1>
             <p className="text-sm text-gray-600 mt-1">
-              Live visual editor for component styling
+              Visual editing concept for frontend interfaces
             </p>
+          </div>
+        </header>
+
+        <div className="flex-1 flex items-center justify-center p-8">
+          <div className="max-w-4xl w-full">
+            <div className="text-center mb-12">
+              <h2 className="text-5xl font-bold text-gray-900 mb-6">
+                Edit Frontend Designs Visually
+              </h2>
+              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                A concept tool for editing website and mobile app interfaces with a live visual editor. 
+                <span className="block mt-2 text-indigo-600 font-semibold">JSON-based workflow. Backend stays untouched.</span>
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="text-4xl mb-4">📤</div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">1. Upload Interface</h3>
+                <p className="text-gray-600 text-sm">
+                  Import JSON representation of your website or mobile app
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="text-4xl mb-4">✨</div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">2. Edit Visually</h3>
+                <p className="text-gray-600 text-sm">
+                  Change styles, colors, spacing with Photoshop-like controls
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="text-4xl mb-4">💾</div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">3. Export Changes</h3>
+                <p className="text-gray-600 text-sm">
+                  Download updated JSON to apply changes to your code
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                <p className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                  Proof of Concept
+                </p>
+              </div>
+              <p className="text-gray-600 text-center mb-8">
+                This is a <strong>concept demonstration</strong> of a visual frontend editor. 
+                The complete end-to-end application is not yet built. You can explore the live editor 
+                functionality by importing sample JSON files.
+              </p>
+              
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setShowLanding(false)}
+                  className="px-8 py-4 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform"
+                >
+                  Try the Editor →
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-500">
+                Supports websites and mobile app interfaces • JSON-based • Backend-safe
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!screen) {
+    return (
+      <div className="h-screen flex flex-col bg-gradient-to-br from-indigo-50 to-blue-50">
+        <header className="bg-white border-b border-gray-200 shadow-sm">
+          <div className="px-6 py-4 flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                🎨 Frontend Visual Editor
+              </h1>
+              <p className="text-sm text-gray-600 mt-1">
+                Live visual editor for component styling
+              </p>
+            </div>
+            <button
+              onClick={() => setShowLanding(true)}
+              className="text-sm text-gray-600 hover:text-gray-900 underline"
+            >
+              ← Back to Home
+            </button>
           </div>
         </header>
 
@@ -129,7 +228,7 @@ export default function Home() {
               Get Started
             </h2>
             <p className="text-gray-600 mb-8 text-lg">
-              Import a Bloom screen JSON file to begin editing. Choose from our sample screens or upload your own.
+              Import a JSON file to begin editing. Choose from our sample screens or upload your own.
             </p>
 
             <div className="space-y-4">
@@ -154,6 +253,13 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 gap-3">
+                <a
+                  href="/sample-screens/website-landing.json"
+                  download
+                  className="px-6 py-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors font-medium border border-green-200"
+                >
+                  🌐 Website Landing Page
+                </a>
                 <a
                   href="/sample-screens/mobile-shop.json"
                   download
@@ -183,7 +289,7 @@ export default function Home() {
               
               <button
                 onClick={() => {
-                  sessionStorage.removeItem('bloom-screen');
+                  sessionStorage.removeItem('editor-screen');
                   window.location.reload();
                 }}
                 className="mt-4 text-xs text-gray-400 hover:text-gray-600 underline"
@@ -204,13 +310,23 @@ export default function Home() {
         <div className="px-6 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
-              🎨 Bloom Interactive Playground
+              Frontend Visual Editor
             </h1>
             <p className="text-sm text-gray-600 mt-1">
-              Live visual editor for component styling
+              Live visual editor for frontend styling
             </p>
           </div>
           <div className="flex items-center gap-3">
+            <select
+              value={previewMode}
+              onChange={(e) => setPreviewMode(e.target.value as 'mobile' | 'tablet' | 'desktop')}
+              className="px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              <option value="mobile">📱 Mobile</option>
+              <option value="tablet">💻 Tablet</option>
+              <option value="desktop">🖥️ Desktop</option>
+            </select>
+
             <button
               onClick={handleExportJSON}
               className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
@@ -261,36 +377,107 @@ export default function Home() {
           />
         </div>
 
-        {/* Center - Canvas with iPhone Frame */}
+        {/* Center - Canvas with Preview */}
         <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-800 to-gray-900 p-8 flex items-center justify-center">
           <div className="relative">
-            {/* iPhone Frame */}
-            <div className="relative bg-black rounded-[50px] p-3 shadow-2xl" style={{ width: '350px', height: '717px' }}>
-              {/* Notch */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-black w-40 h-7 rounded-b-3xl z-10"></div>
-              
-              {/* Screen */}
-              <div className="relative w-full h-full bg-white rounded-[40px] overflow-hidden">
-                <div className="w-full h-full overflow-y-auto overflow-x-hidden">
-                  {screen.components.map((component) => (
-                    <ComponentRenderer
-                      key={component.id}
-                      component={component}
-                      selectedId={selectedComponentId}
-                      onSelectComponent={setSelectedComponentId}
-                    />
-                  ))}
+            {previewMode === 'mobile' && (
+              <>
+                {/* iPhone Frame */}
+                <div className="relative bg-black rounded-[50px] p-3 shadow-2xl" style={{ width: '350px', height: '717px' }}>
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-black w-40 h-7 rounded-b-3xl z-10"></div>
+                  
+                  {/* Screen */}
+                  <div className="relative w-full h-full bg-white rounded-[40px] overflow-hidden">
+                    <div className="w-full h-full overflow-y-auto overflow-x-hidden">
+                      {screen.components.map((component) => (
+                        <ComponentRenderer
+                          key={component.id}
+                          component={component}
+                          selectedId={selectedComponentId}
+                          onSelectComponent={setSelectedComponentId}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Home Indicator */}
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full opacity-50"></div>
                 </div>
-              </div>
-              
-              {/* Home Indicator */}
-              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full opacity-50"></div>
-            </div>
-            
-            {/* Label */}
-            <div className="text-center mt-4 text-white text-sm font-medium opacity-75">
-              iPhone 14 Pro Preview
-            </div>
+                
+                {/* Label */}
+                <div className="text-center mt-4 text-white text-sm font-medium opacity-75">
+                  iPhone 14 Pro Preview
+                </div>
+              </>
+            )}
+
+            {previewMode === 'tablet' && (
+              <>
+                {/* Tablet Frame */}
+                <div className="relative bg-gray-900 rounded-[40px] p-4 shadow-2xl" style={{ width: '768px', height: '1024px' }}>
+                  {/* Screen */}
+                  <div className="relative w-full h-full bg-white rounded-[30px] overflow-hidden">
+                    <div className="w-full h-full overflow-y-auto overflow-x-hidden">
+                      {screen.components.map((component) => (
+                        <ComponentRenderer
+                          key={component.id}
+                          component={component}
+                          selectedId={selectedComponentId}
+                          onSelectComponent={setSelectedComponentId}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Home Button */}
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-12 border-2 border-gray-700 rounded-full"></div>
+                </div>
+                
+                {/* Label */}
+                <div className="text-center mt-4 text-white text-sm font-medium opacity-75">
+                  iPad Preview
+                </div>
+              </>
+            )}
+
+            {previewMode === 'desktop' && (
+              <>
+                {/* Desktop Browser Frame */}
+                <div className="relative bg-gray-800 rounded-lg shadow-2xl" style={{ width: '1200px', height: '800px' }}>
+                  {/* Browser Chrome */}
+                  <div className="bg-gray-700 rounded-t-lg px-4 py-3 flex items-center gap-2">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="flex-1 mx-4 bg-gray-600 rounded px-3 py-1 text-xs text-gray-300">
+                      localhost:3000
+                    </div>
+                  </div>
+                  
+                  {/* Screen */}
+                  <div className="relative w-full bg-white overflow-hidden" style={{ height: 'calc(100% - 48px)' }}>
+                    <div className="w-full h-full overflow-y-auto overflow-x-hidden">
+                      {screen.components.map((component) => (
+                        <ComponentRenderer
+                          key={component.id}
+                          component={component}
+                          selectedId={selectedComponentId}
+                          onSelectComponent={setSelectedComponentId}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Label */}
+                <div className="text-center mt-4 text-white text-sm font-medium opacity-75">
+                  Desktop Browser Preview
+                </div>
+              </>
+            )}
           </div>
         </div>
 
